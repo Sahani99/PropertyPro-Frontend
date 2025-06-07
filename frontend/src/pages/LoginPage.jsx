@@ -30,6 +30,8 @@ import { FaApple, FaFacebook, FaTwitter } from 'react-icons/fa';
 import logoSrc from '/Propertypro.png'; // If logo is in public folder
 // import logoSrc from '../assets/propertypro-logo.png'; // If logo is in src/assets
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+
 function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
