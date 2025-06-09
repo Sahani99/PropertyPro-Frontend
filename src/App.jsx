@@ -6,10 +6,10 @@ import LoginPage from './pages/LoginPage';
 import PropertiesPage from './pages/PropertiesPage';
 import DashboardPage from './pages/DashboardPage';
 import HomePage from './pages/HomePage';
-import Navbar from './components/Navbar';
+// import Navbar from './components/Navbar';
 import ProtectedRoute from './components/ProtectedRoute';
-import FutureProjectAdminPage from './pages/admin/FutureProjectAdminPage';
-import Project3DViewPage from './pages/user/Project3DViewPage';  
+// import FutureProjectAdminPage from './pages/admin/FutureProjectAdminPage';
+// import Project3DViewPage from './pages/user/Project3DViewPage';  
 
 
 // A small component to handle redirection if already logged in and trying to access /login
@@ -24,7 +24,7 @@ function App() {
         <AuthProvider>
             <Router>
                  <Flex direction="column" minH="100vh"> 
-                <Navbar />
+                {/* <Navbar /> */}
                           <Box
             as="main"
             flex="20"      // Allows this box to grow and fill available vertical space
@@ -35,8 +35,8 @@ function App() {
                         <Route path="/" element={<HomePage />} />
                         <Route path="/login"element={<PublicRoute><LoginPage /></PublicRoute>}/>
                         <Route path="/properties"element={<PublicRoute><PropertiesPage/></PublicRoute>}/>
-                        <Route path="/admin/future-project"element={<PublicRoute><FutureProjectAdminPage/></PublicRoute>}/>
-                        <Route path="/future-projects/:projectId/view-3d" element={<Project3DViewPage />} />
+                        {/* <Route path="/admin/future-project"element={<PublicRoute><FutureProjectAdminPage/></PublicRoute>}/> */}
+                        {/* <Route path="/future-projects/:projectId/view-3d" element={<Project3DViewPage />} /> */}
 
                         {/* <Route path="/register" element={<RegisterPage />} /> */} {/* Optional */}
 
