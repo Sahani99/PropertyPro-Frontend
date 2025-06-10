@@ -31,8 +31,8 @@ export default function Navbar() {
     <Box as="header" w="full" boxShadow="sm">
       <Container maxW="container.xl" px={32}>
         <Flex
-          bg={useColorModeValue('white', 'gray.800')}
-          color={useColorModeValue('gray.600', 'white')}
+          bg={useColorModeValue('white', 'green.800')}
+          color={useColorModeValue('green.600', 'green')}
           minH={'60px'}
           py={{ base: 2 }}
           align={'center'}
@@ -59,7 +59,7 @@ export default function Navbar() {
             <Text
               fontSize="xl"
               fontWeight="bold"
-              color={useColorModeValue('blue.600', 'blue.200')}
+              color={useColorModeValue('green.600', 'green.200')}
               mr={10}
               pl={{ base: 2, md: 0 }}
             >
@@ -86,7 +86,7 @@ export default function Navbar() {
               fontSize={'sm'}
               fontWeight={500}
               variant={'ghost'}
-              colorScheme="blue"
+              colorScheme="green"
             >
               Sign In
             </Button>
@@ -96,9 +96,9 @@ export default function Navbar() {
               fontSize={'sm'}
               fontWeight={600}
               color={'white'}
-              bg={'blue.500'}
+              bg={'green.500'}
               _hover={{
-                bg: 'blue.600',
+                bg: 'green.600',
               }}
             >
               Sign Up
