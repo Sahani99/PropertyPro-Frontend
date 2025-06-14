@@ -39,7 +39,7 @@ export default function Navbar() {
           justify="space-between"
          
         >
-          {/* Left side - Logo and Desktop Nav */}
+      
           <Flex align="center">
             <Flex
               flex={{ base: 1, md: 'auto' }}
@@ -56,15 +56,18 @@ export default function Navbar() {
               />
             </Flex>
             
-            <Text
-              fontSize="xl"
-              fontWeight="bold"
-              color={useColorModeValue('green.600', 'green.200')}
-              mr={10}
-              pl={{ base: 2, md: 0 }}
-            >
-              <RouterLink to="/">ProPertyPro</RouterLink>
-            </Text>
+            <RouterLink to="/">
+              <Flex align="center">
+                <Box boxSize="56px" mr={2}>
+                  <img
+                    src="/Propertypro.png"
+                    alt="ProPertyPro Logo"
+                    style={{ width: '100%', height: 'auto', display: 'block' }}
+                  />
+                </Box>
+              
+              </Flex>
+            </RouterLink>
 
             <Flex 
               display={{ base: 'none', md: 'flex' }}
@@ -74,7 +77,7 @@ export default function Navbar() {
             </Flex>
           </Flex>
 
-          {/* Right side - Auth buttons */}
+         
           <Stack
             direction={'row'}
             spacing={6}
