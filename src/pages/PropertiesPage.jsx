@@ -1,15 +1,15 @@
-// src/pages/PropertiesPage.jsx
+// src/pages/user/PropertiesPage.jsx
 import React, { useState, useEffect, useCallback } from 'react';
 import {
   Box,
   Button,
-  Flex, // Keep Flex imported if used elsewhere, like in loading state
+  Flex,
   FormControl,
   FormLabel,
   Heading,
   Input,
   Select,
-  SimpleGrid,
+  SimpleGrid, // Still needed for filter layout
   Spinner,
   Stack,
   Text,
@@ -17,15 +17,15 @@ import {
   AlertIcon,
   AlertTitle,
   AlertDescription,
-  // Icon, // Not directly used in this version, but good to have if adding more icons
   InputGroup,
   InputLeftElement,
 } from '@chakra-ui/react';
 import { SearchIcon } from '@chakra-ui/icons';
-import PropertyCard from '../components/PropertyCard';
-import useDebounce from '../hooks/useDebounce';
+//import PropertyCard from '../../../components/PropertyCard'; // Path if directly imported
+import useDebounce from '../hooks/useDebounce'; // <--- CORRECTED PATH
+import PropertyList from '../components/PropertyList'; // <--- CORRECTED PATH
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 
 const PropertiesPage = () => {
   const [properties, setProperties] = useState([]);
@@ -45,7 +45,7 @@ const PropertiesPage = () => {
     sortBy: 'dateAdded',
     sortOrder: 'desc',
   });
-  
+
 
   const fetchProperties = useCallback(async () => {
     setLoading(true);
@@ -104,14 +104,13 @@ const PropertiesPage = () => {
   };
 
   return (
-    // Using Box for full width control with internal padding
-        <Box
+    <Box
       width="100%"
       px={{ base: 4, md: 6, lg: 8 }}
       py={{ base: 4, md: 8 }}
       display="flex"
       flexDirection="column"
-      flex="1" // Ensures this page component tries to fill space given by App.jsx layout
+      flex="1"
     >
       <Stack spacing={6} mb={8}>
         <Heading as="h1" size="xl" textAlign="center">
@@ -220,7 +219,7 @@ const PropertiesPage = () => {
                 id="sortBy"
                 name="sortBy"
                 value={sortOptions.sortBy}
-                onChange={handleSortChange} // Correctly assigned
+                onChange={handleSortChange}
                 bg="white"
                 size={{ base: "sm", md: "md" }}
                 fontSize={{ base: "sm", md: "md" }}
@@ -239,7 +238,7 @@ const PropertiesPage = () => {
                 id="sortOrder"
                 name="sortOrder"
                 value={sortOptions.sortOrder}
-                onChange={handleSortChange} // Correctly assigned
+                onChange={handleSortChange}
                 bg="white"
                 size={{ base: "sm", md: "md" }}
                 fontSize={{ base: "sm", md: "md" }}
@@ -259,16 +258,11 @@ const PropertiesPage = () => {
       {/* Display Area for Properties, Loading, Error */}
        {loading && (
           <Flex
-            flex="1" // Make this loading Flex container also try to fill its parent Box
+            flex="1"
             justifyContent="center"
             alignItems="center"
-            // MODIFICATION: Add a significant minHeight or ensure it truly expands
-            // Option 1: Give it a minHeight relative to viewport height (minus estimated header/filter height)
-            // minHeight="calc(100vh - 350px)" // Adjust 350px based on your actual header+filter height
-            // Option 2: A simpler, large fixed minHeight often works well for loading states
-            // minHeight={{ base: "300px", md: "400px" }} // Ensures it has substantial height
-            minHeight="calc(100vh - 350px)" 
-            width="100%" // Ensure it takes full width too
+            minHeight="calc(100vh - 350px)"
+            width="100%"
           >
           <Spinner size="xl" thickness="4px" speed="0.65s" emptyColor="gray.200" color="teal.500" />
           <Text ml={3}>Loading properties...</Text>
@@ -285,27 +279,10 @@ const PropertiesPage = () => {
           </Flex>
       )}
 
-      {!loading && !error && properties.length === 0 && (
-        <Text textAlign="center" fontSize="lg" color="gray.500" mt={10}>
-          No properties found matching your criteria. Try adjusting your filters!
-        </Text>
+      {!loading && !error && (
+        <PropertyList properties={properties} />
       )}
 
-        {!loading && !error && properties.length === 0 && (
-          <Flex flex="1" justify="center" align="center" p={5} minHeight={{ base: "300px", md: "400px" }}>
-            <Text textAlign="center" fontSize="xl" color="gray.500">
-              No properties found matching your criteria.
-              <Text fontSize="md" mt={2}>Try adjusting your filters!</Text>
-            </Text>
-          </Flex>
-      )}
-       {!loading && !error && properties.length > 0 && (
-          <SimpleGrid columns={{ base: 1, sm: 2, md: 3 }} spacing={6} width="100%">
-            {properties.map(property => (
-              <PropertyCard key={property._id} property={property} />
-            ))}
-          </SimpleGrid>
-        )}
     </Box>
   );
 };
